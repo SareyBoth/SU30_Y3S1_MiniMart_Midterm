@@ -1,0 +1,34 @@
+#dashboard
+
+#category
+    id 
+    name 
+    image 
+    description 
+    status 
+
+#product
+    Upload / delete images
+
+    Reuse across the system (e.g., category thumbnails) 
+
+#order 
+
+#payment
+
+#delivery (to be discuess)
+
+#store_location
+
+#coupon
+
+#media
+ 
+#user 
+
+#Authentication 
+
+#Settings and Configuration
+
+#email
+
