@@ -3,9 +3,12 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "mix",
+        "dev": "npm run development",
+        "development": "mix",
         "watch": "mix watch",
-        "prod": "mix --production"
+        "build": "vite build",
+        "prod": "npm run production",
+        "production": "mix --production"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
