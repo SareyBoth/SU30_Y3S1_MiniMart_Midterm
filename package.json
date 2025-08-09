@@ -6,9 +6,7 @@
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
-        "build": "vite build",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "prod": "mix --production"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

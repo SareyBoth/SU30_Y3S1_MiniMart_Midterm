@@ -31,50 +31,54 @@
                         <h4 class="page-title">Add Category</h4>
                     </div>
                 </div>
-                <div class="row">
+                <div class="">
                     <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-lg-8 offset-lg-2">
-                            <form>
-                                <div class="circular-upload" style="margin: 36px 0;">
-                                    <div class="image-preview " id="image-preview">
-                                        <div class="label-text text-primary" id="label-text">Add image</div>
-                                    </div>
-                                    <input name="image" type="file" id="file-input" accept="image/*">
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Name <span class="text-danger">*</span></label>
-                                            <input name="name" class="form-control" placeholder="Input category name" type="text">
+                            <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-lg-8 offset-lg-2">
+
+                                    <div class="circular-upload" style="margin: 36px 0;">
+                                        <div class="image-preview " id="image-preview">
+                                            <div class="label-text text-primary" id="label-text">Add image</div>
                                         </div>
+                                        <input name="image" type="file" id="file-input" accept="image/*">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="display-block">Status</label>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="status" id="doctor_active" value="option1" checked>
-                                                <label class="form-check-label" for="doctor_active">
-                                                    Active
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="option2">
-                                                <label class="form-check-label" for="doctor_inactive">
-                                                    Inactive
-                                                </label>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Name <span class="text-danger">*</span></label>
+                                                <input name="name" class="form-control" placeholder="Input category name" type="text">
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="display-block">Status</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="status" id="doctor_active" value="1" checked>
+                                                    <label class="form-check-label" for="doctor_active">Active</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="0">
+                                                    <label class="form-check-label" for="doctor_inactive">Inactive</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="">
-                                    <div class="form-group">
-                                        <label>Description </label>
-                                        <textarea name="description" class="form-control" style="height: 220px" type="text" placeholder="Describe everything about the category"></textarea>
+
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label>Description </label>
+                                            <textarea name="description" class="form-control" style="height: 220px" placeholder="Describe everything about the category"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="m-t-20 text-center">
-                                    <button type="submit" class="btn btn-primary submit-btn">Create Category</button>
+
+                                    <div class="m-t-20 text-center">
+                                        <button type="submit" class="btn btn-primary submit-btn">Create Category</button>
+                                    </div>
+
                                 </div>
                             </form>
                         </div>
