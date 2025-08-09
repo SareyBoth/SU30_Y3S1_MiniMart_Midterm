@@ -11,7 +11,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('dashboard.category.index');
+        $categories = Category::all();
+        return view('dashboard.category.index', compact('categories'));
     }
     public function create()
     {
@@ -30,11 +31,16 @@ class CategoryController extends Controller
 
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
+            $imagePath = $request->file('image')->store('category', 'public');
             $validated['image'] = $imagePath;
         }
 
-        Category::create($validated);
+        Category::create([
+            'name' => $validated['name'],
+            'image' => $validated['image'],
+            'description' => $validated['description'] ?? null,
+            'status' => $validated['status'],
+        ]);
 
         return redirect()->route('dashboard.category.index')->with('success', 'Category created successfully.');
     }
@@ -42,5 +48,14 @@ class CategoryController extends Controller
     public function edit()
     {
         return view('dashboard.category.edit');
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('dashboard.category.index')
+            ->with('success', 'Category deleted successfully.');
     }
 }

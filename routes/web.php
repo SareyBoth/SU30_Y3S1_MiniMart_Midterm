@@ -16,12 +16,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     //Category
     Route::get('/dashboard/category', [CategoryController::class, 'index'])->name('dashboard.category.index');
     Route::get('/dashboard/category/create', [CategoryController::class, 'create'])->name('dashboard.category.create');
     Route::post('/dashboard/category', [CategoryController::class, 'store'])->name('dashboard.category.store');
-    Route::get('/dashboard/category/edit', [CategoryController::class, 'edit'])->name('dashboard.category.edit');
+    Route::get('/dashboard/category/edit/{id}', [CategoryController::class, 'edit'])->name('dashboard.category.edit');
+    Route::put('/dashboard/category/update/{id}', [CategoryController::class, 'update'])->name('dashboard.category.update');
+    Route::delete('/dashboard/category/{id}', [CategoryController::class, 'destroy'])->name('dashboard.category.destroy');
 });
 
 require __DIR__ . '/auth.php';
