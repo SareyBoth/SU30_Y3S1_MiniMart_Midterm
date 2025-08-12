@@ -33,46 +33,58 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form>
+                        <form action="{{ route('dashboard.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
                             <div class="circular-upload" style="margin: 36px 0;">
-                                <div class="image-preview " id="image-preview">
-                                    <div class="label-text text-primary" id="label-text">Add image</div>
+                                <div class="image-preview" id="image-preview"
+                                    @if($category->image)
+                                        style="background-image: url('{{ asset('storage/' . $category->image) }}'); background-size: cover; background-position: center;"
+                                    @endif>
+                                    <div class="label-text text-primary" id="label-text" @if($category->image) style="opacity: 0;" @endif>
+                                        Add image
+                                    </div>
                                 </div>
-                                <input type="file" id="file-input" accept="image/*">
+                                <input name="image" type="file" id="file-input" accept="image/*">
                             </div>
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Name <span class="text-danger">*</span></label>
-                                        <input class="form-control" placeholder="Input category name" type="text">
+                                        <input name="name" value="{{ old('name', $category->name) }}" class="form-control"
+                                            placeholder="Input category name" type="text" required>
                                     </div>
                                 </div>
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="display-block">Status</label>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="doctor_active" value="option1" checked>
-                                            <label class="form-check-label" for="doctor_active">
-                                                Active
-                                            </label>
+                                            <input class="form-check-input" type="radio" name="status" id="status_active" value="1"
+                                                {{ old('status', $category->status) == 1 ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="status_active">Active</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="option2">
-                                            <label class="form-check-label" for="doctor_inactive">
-                                                Inactive
-                                            </label>
+                                            <input class="form-check-input" type="radio" name="status" id="status_inactive" value="2"
+                                                {{ old('status', $category->status) == 2 ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="status_inactive">Inactive</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="">
+
+                            <div>
                                 <div class="form-group">
-                                    <label>Description </label>
-                                    <textarea class="form-control" style="height: 220px" type="text" placeholder="Describe everything about the category"></textarea>
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control" style="height: 220px"
+                                            placeholder="Describe everything about the category">{{ old('description', $category->description) }}</textarea>
                                 </div>
                             </div>
+
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Update Category</button>
+                                <button class="btn btn-primary submit-btn" type="submit">Update Category</button>
                             </div>
                         </form>
                     </div>

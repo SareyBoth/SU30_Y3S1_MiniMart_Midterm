@@ -75,14 +75,12 @@
                     }
                 }
                 o.height = o.height == 'auto' ? me.parent().height() : o.height;
-                var wrapper = $(divS)
-                    .addClass(o.wrapperClass)
-                    .css({
-                        position: 'relative',
-                        overflow: 'hidden',
-                        width: o.width,
-                        height: o.height,
-                    });
+                var wrapper = $(divS).addClass(o.wrapperClass).css({
+                    position: 'relative',
+                    overflow: 'hidden',
+                    width: o.width,
+                    height: o.height,
+                });
                 me.css({
                     overflow: 'hidden',
                     width: o.width,

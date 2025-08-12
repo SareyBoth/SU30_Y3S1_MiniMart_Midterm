@@ -9,11 +9,23 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $perPage = 12;
+        
+        if ($request->ajax()) {
+            $categories = Category::with('statusRelation')
+                ->paginate($perPage);
+            return view('dashboard.category.partials.categories', compact('categories'))->render();
+        }
+
+        $categories = Category::with('statusRelation')
+            ->paginate($perPage);
+
         return view('dashboard.category.index', compact('categories'));
     }
+
+
     public function create()
     {
         return view('dashboard.category.create');
@@ -26,9 +38,8 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
         ]);
-
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('category', 'public');
@@ -45,10 +56,46 @@ class CategoryController extends Controller
         return redirect()->route('dashboard.category.index')->with('success', 'Category created successfully.');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('dashboard.category.edit');
+        $category = Category::findOrFail($id);
+        return view('dashboard.category.edit', compact('category'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'nullable|string',
+            'status' => 'required|integer',
+        ]);
+
+        // If a new image is uploaded
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($category->image && \Storage::disk('public')->exists($category->image)) {
+                \Storage::disk('public')->delete($category->image);
+            }
+
+            // Store new image
+            $imagePath = $request->file('image')->store('category', 'public');
+            $validated['image'] = $imagePath;
+        } else {
+            // Keep old image if no new upload
+            $validated['image'] = $category->image;
+        }
+
+        // Update category
+        $category->update($validated);
+
+        return redirect()->route('dashboard.category.index')
+            ->with('success', 'Category updated successfully.');
+    }
+
+
 
     public function destroy($id)
     {
