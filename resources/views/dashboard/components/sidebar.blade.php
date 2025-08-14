@@ -25,13 +25,22 @@
                         <i class="fa fa-dashboard"></i><span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('dashboard/category') ? 'active' : '' }}">
+                    <li class="submenu">
+                        <a href="#"><i class="fa fa-list"></i> <span> Category </span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="/dashboard/category">Category</a></li>
+                            <li><a href="/dashboard/sub-category">Sub Category</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="{{ request()->routeIs('dashboard/category') ? 'active' : '' }}">
                         <a href="/dashboard/category">
                             <i class="fa fa-list"></i> <span>Category</span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="/dashboard/product"><i class="fa fa-table"></i> <span>Product</span></a>
+                    </li> -->
+                    <li class="{{ request()->routeIs('dashboard/product') ? 'active' : '' }}">
+                        <a href=" /dashboard/product">
+                            <i class="fa fa-table"></i> <span>Product</span>
+                        </a>
                     </li>
                     <li>
                         <a href="/dashboard/order"><i class="fa-solid fa-bag-shopping"></i> <span>Order</span></a>
@@ -200,6 +209,14 @@
             </div>
         </div>
     </div>
+
+
+    <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/dashboard/popper.min.js')}}"></script>
+    <script src="{{ asset('js/dashboard/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/dashboard/jquery.slimscroll.js')}}"></script>
+    <script src="{{ asset('js/dashboard/select2.min.js')}}"></script>
+    <script src="{{ asset('js/dashboard/app.js')}}"></script>
 </body>
 
 </html>

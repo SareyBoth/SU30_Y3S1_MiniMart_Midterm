@@ -5,33 +5,26 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\SubCategory;
 use App\Models\Category;
 
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
     public function index(Request $request)
     {
         $perPage = 12;
-        $categories = Category::with('statusRelation')->paginate($perPage);
-
-        // Handle AJAX request for Load More
-        if ($request->ajax()) {
-            $view = view('dashboard.category.partials.categories', compact('categories'))->render();
-            return response()->json([
-                'html' => $view,
-                'next_page_url' => $categories->nextPageUrl()
-            ]);
-        }
+        $sub_categories = SubCategory::with('statusRelation')->paginate($perPage);
 
         // Normal page load
-        return view('dashboard.category.index', compact('categories'));
+        return view('dashboard.sub_category.index', compact('sub_categories'));
     }
 
 
 
     public function create()
     {
-        return view('dashboard.category.create');
+        $categories = Category::where('status', 1)->get();
+        return view('dashboard.sub_category.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -39,6 +32,7 @@ class CategoryController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'category_id' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|integer',
@@ -49,28 +43,31 @@ class CategoryController extends Controller
             $validated['image'] = $imagePath;
         }
 
-        Category::create([
+        SubCategory::create([
             'name' => $validated['name'],
+            'category_id' => $validated['category_id'],
             'image' => $validated['image'],
             'description' => $validated['description'] ?? null,
             'status' => $validated['status'],
         ]);
 
-        return redirect()->route('dashboard.category.index')->with('success', 'Category created successfully.');
+        return redirect()->route('dashboard.sub_category.index')->with('success', 'Sub Category created successfully.');
     }
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('dashboard.category.edit', compact('category'));
+        $sub_category = SubCategory::findOrFail($id);
+        $categories = Category::where('status', 1)->get();
+        return view('dashboard.sub_category.edit', compact('sub_category', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $category = SubCategory::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'category_id' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|integer',
@@ -94,18 +91,18 @@ class CategoryController extends Controller
         // Update category
         $category->update($validated);
 
-        return redirect()->route('dashboard.category.index')
-            ->with('success', 'Category updated successfully.');
+        return redirect()->route('dashboard.sub_category.index')
+            ->with('success', 'Sub Category updated successfully.');
     }
 
 
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $subcategory = SubCategory::findOrFail($id);
+        $subcategory->delete();
 
-        return redirect()->route('dashboard.category.index')
-            ->with('success', 'Category deleted successfully.');
+        return redirect()->route('dashboard.sub_category.index')
+            ->with('success', 'Subcategory deleted successfully.');
     }
 }

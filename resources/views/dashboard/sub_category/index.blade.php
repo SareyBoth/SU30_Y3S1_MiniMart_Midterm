@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
     <title>PrimeMart</title>
-
     @include('dashboard.components.style')
-
-    <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/popper.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/bootstrap.min.js') }}"></script>
 </head>
 
 <body>
@@ -34,22 +29,22 @@
 
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">Category</h4>
+                        <h4 class="page-title">Sub Category</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{{ route('dashboard.category.create') }}" class="btn btn-primary btn-rounded float-right">
-                            <i class="fa fa-plus"></i> Add Category
+                        <a href="{{ route('dashboard.sub_category.create') }}" class="btn btn-primary btn-rounded float-right">
+                            <i class="fa fa-plus"></i> Add Sub Category
                         </a>
                     </div>
                 </div>
 
-                <div id="category-list" class="row doctor-grid">
-                   @foreach ($categories as $category)
+                <div class="row">
+                    @foreach ($sub_categories as $sub_category)
                     <div class="col-md-4 col-sm-4 col-lg-3">
                         <div class="profile-widget">
                             <div class="doctor-img">
                                 <a class="avatar">
-                                    <img alt="" src="/storage/{{ $category->image }}" />
+                                    <img alt="" src="/storage/{{ $sub_category->image }}" />
                                 </a>
                             </div>
                             <div class="dropdown profile-action">
@@ -57,28 +52,31 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('dashboard.category.edit', $category->id) }}">
+                                    <a class="dropdown-item" href="{{ route('dashboard.sub_category.edit', $sub_category->id) }}">
                                         <i class="fa fa-pencil m-r-5"></i> Edit
                                     </a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor" data-id="{{ $category->id }}">
+                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                        data-target="#deleteModal"
+                                        data-url="{{ route('dashboard.sub_category.destroy', $sub_category->id) }}">
                                         <i class="fa fa-trash-o m-r-5"></i> Delete
                                     </a>
                                 </div>
                             </div>
-                            <h4 class="doctor-name text-ellipsis"><a>{{ $category->name }}</a></h4>
+                            <h4 class="doctor-name text-ellipsis"><a>{{ $sub_category->name }}</a></h4>
                             @php
-                                $statusName = $category->statusRelation ? $category->statusRelation->name : 'No Status';
-                                $statusStyle = strtolower($statusName) === 'active' ? 'color:green;' : (strtolower($statusName) === 'inactive' ? 'color:red;' : '');
+                            $statusName = $sub_category->statusRelation ? $sub_category->statusRelation->name : 'No Status';
+                            $categoryName = $sub_category->categoryRelation ? $sub_category->categoryRelation->name : 'No Category';
+                            $statusStyle = strtolower($statusName) === 'active' ? 'color:green;' : (strtolower($statusName) === 'inactive' ? 'color:red;' : '');
                             @endphp
                             <p class="text-4" style="{{ $statusStyle }}">{{ $statusName }}</p>
-                            <div class="user-country">{{ $category->description }}</div>
+                            <div class="user-country">{{ $categoryName }}</div>
                         </div>
                     </div>
                     @endforeach
                 </div>
 
                 <div class="pagination-container mt-5 mb-5 d-flex justify-content-end">
-                    {{ $categories->links('pagination::bootstrap-4') }}
+                    {{ $sub_categories->links('pagination::bootstrap-4') }}
                 </div>
 
             </div>
@@ -86,11 +84,11 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="delete_doctor" class="modal fade delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="deleteModal" class="modal fade delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <h3>Are you sure you want to delete this Category?</h3>
+                    <h3>Are you sure you want to delete this Sub Category?</h3>
                     <div class="m-t-20">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                         <form id="delete-form" method="POST" style="display:inline;">
@@ -128,22 +126,16 @@
     <script>
         $(document).ready(function() {
 
-            // Delete Modal
-            $('#delete_doctor').on('show.bs.modal', function(event) {
+            // Use the exact route from data-url
+            $('#deleteModal').on('show.bs.modal', function(event) {
                 let button = $(event.relatedTarget);
-                let categoryId = button.data('id');
-                let actionUrl = `/dashboard/category/${categoryId}`;
+                let actionUrl = button.data('url');
                 $('#delete-form').attr('action', actionUrl);
             });
 
-            // Show loading on Delete
+            // Show loading modal on form submit
             $('#delete-form').on('submit', function() {
-                $('#delete_doctor').modal('hide');
-                $('#loadingModal').modal('show');
-            });
-
-            // Show loading on Edit
-            $('.category-edit-btn').on('click', function() {
+                $('#deleteModal').modal('hide');
                 $('#loadingModal').modal('show');
             });
 

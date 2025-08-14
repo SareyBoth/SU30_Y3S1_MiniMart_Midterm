@@ -5,28 +5,25 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Category;
+use App\Models\Product;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = 12;
-        $categories = Category::with('statusRelation')->paginate($perPage);
+        $perPage = 20;
 
-        // Handle AJAX request for Load More
         if ($request->ajax()) {
-            $view = view('dashboard.category.partials.categories', compact('categories'))->render();
-            return response()->json([
-                'html' => $view,
-                'next_page_url' => $categories->nextPageUrl()
-            ]);
+            $products = Product::with('statusRelation')
+                ->paginate($perPage);
+            return view('dashboard.category.partials.products', compact('products'))->render();
         }
 
-        // Normal page load
-        return view('dashboard.category.index', compact('categories'));
-    }
+        $products = Product::with('statusRelation')
+            ->paginate($perPage);
 
+        return view('dashboard.product.index', compact('products'));
+    }
 
 
     public function create()
@@ -61,8 +58,8 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('dashboard.category.edit', compact('category'));
+        $product = Product::findOrFail($id);
+        return view('dashboard.product.edit', compact('product'));
     }
 
     public function update(Request $request, $id)
@@ -102,10 +99,10 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $product = Product::findOrFail($id);
+        $product->delete();
 
-        return redirect()->route('dashboard.category.index')
-            ->with('success', 'Category deleted successfully.');
+        return redirect()->route('dashboard.product.index')
+            ->with('success', 'Product deleted successfully.');
     }
 }
