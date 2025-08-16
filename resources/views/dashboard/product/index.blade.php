@@ -31,7 +31,7 @@
                         <h4 class="page-title">Product</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="add-appointment.html" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Product</a>
+                        <a href="{{ route('dashboard.product.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Product</a>
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +44,7 @@
                                         <th>Product ID</th>
                                         <th>Product Name</th>
                                         <th class="text-center">Category</th>
-                                        <th class="text-center">Sub-Category</th>
+                                        <th class="text-center">Sub Category</th>
                                         <th class="text-center">Price</th>
                                         <th class="text-center">Stock</th>
                                         <th class="text-center">Status</th>
@@ -54,16 +54,21 @@
                                 <tbody>
                                     @foreach ( $products as $product)
                                     <tr>
-                                        <td>{{ $product->id }}</td>
-                                        <td>{{ $product->id }}</td>
+                                        @php
+                                        $productCategory = $product->categoryRelation ? $product->categoryRelation->name : 'N/A';
+                                        $productSubCategory = $product->subCategoryRelation ? $product->subCategoryRelation->name : 'N/A';
+                                        $productStatus = $product->statusRelation ? $product->statusRelation->name : 'Unknown';
+                                        @endphp
+                                        <td><img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="width: 100px; height: 100px; object-fit: cover;"></td>
+                                        <td>{{ $product->product_id }}</td>
                                         <td>{{ $product->name }}</td>
-                                        <td class="text-center">{{ $product->id }}</td>
-                                        <td class="text-center">{{ $product->id }}</td>
+                                        <td class="text-center">{{ $productCategory}}</td>
+                                        <td class="text-center">{{ $productSubCategory}}</td>
                                         <td class="text-center">${{ $product->price }}</td>
                                         <td class="text-center">{{ $product->stock_quantity }}</td>
                                         <td class="text-center">
                                             <span class="custom-badge {{ $product->status == 1 ? 'status-green' : ($product->status == 2 ? 'status-red' : '') }}">
-                                                {{ $product->status == 1 ? 'Active' : ($product->status == 2 ? 'Inactive' : 'Unknown') }}
+                                                {{ $productStatus }}
                                             </span>
                                         </td>
                                         <td class="text-center">
@@ -96,7 +101,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <h3>Are you sure you want to delete this Category?</h3>
+                    <h3>Are you sure you want to delete this product?</h3>
                     <div class="m-t-20">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
 

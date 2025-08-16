@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     // If your statuses table does not have `created_at` and `updated_at` columns, disable timestamps:
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $table = 'statuses';
 

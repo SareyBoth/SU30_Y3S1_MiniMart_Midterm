@@ -11,7 +11,7 @@ use App\Http\Controllers\Dashboard\ProductController;
 Route::get('/', function () {
     return view('front-end.index');
 });
-
+Route::get('/get-subcategories/{category_id}', [ProductController::class, 'getSubCategories']);
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 

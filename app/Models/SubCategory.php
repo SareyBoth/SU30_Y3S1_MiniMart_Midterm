@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
     protected $table = 'sub_categories';
     protected $fillable = ['name', 'image', 'category_id', 'description', 'status'];
     // Category.php

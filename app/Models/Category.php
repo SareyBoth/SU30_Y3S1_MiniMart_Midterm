@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
     protected $table = 'categories';
     protected $fillable = ['name', 'image', 'description', 'status'];
     // Category.php

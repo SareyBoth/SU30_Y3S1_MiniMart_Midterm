@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
+use App\Models\SubCategory;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -28,7 +30,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('dashboard.category.create');
+        $sub_categories = SubCategory::where('status', 1)->get();
+        $categories = Category::where('status', 1)->get();
+        return view('dashboard.product.create', compact('sub_categories', 'categories'));
     }
 
     public function store(Request $request)
@@ -36,38 +40,52 @@ class ProductController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'category_id' => 'required|integer',
+            'sub_category_id' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|integer',
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('category', 'public');
+            $imagePath = $request->file('image')->store('product', 'public');
             $validated['image'] = $imagePath;
         }
 
-        Category::create([
+        Product::create([
             'name' => $validated['name'],
+            'category_id' => $validated['category_id'],
+            'sub_category_id' => $validated['sub_category_id'],
+            'price' => $validated['price'],
+            'stock_quantity' => $validated['stock_quantity'],
             'image' => $validated['image'],
             'description' => $validated['description'] ?? null,
             'status' => $validated['status'],
         ]);
 
-        return redirect()->route('dashboard.category.index')->with('success', 'Category created successfully.');
+        return redirect()->route('dashboard.product.index')->with('success', 'product created successfully.');
     }
 
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('dashboard.product.edit', compact('product'));
+        $categories = Category::where('status', 1)->get();
+        $sub_categories = SubCategory::where('status', 1)->get();
+        return view('dashboard.product.edit', compact('product', 'categories', 'sub_categories'));
     }
 
     public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $product = Product::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'category_id' => 'required|integer',
+            'sub_category_id' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|integer',
@@ -76,23 +94,23 @@ class ProductController extends Controller
         // If a new image is uploaded
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($category->image && \Storage::disk('public')->exists($category->image)) {
-                \Storage::disk('public')->delete($category->image);
+            if ($product->image && \Storage::disk('public')->exists($product->image)) {
+                \Storage::disk('public')->delete($product->image);
             }
 
             // Store new image
-            $imagePath = $request->file('image')->store('category', 'public');
+            $imagePath = $request->file('image')->store('product', 'public');
             $validated['image'] = $imagePath;
         } else {
             // Keep old image if no new upload
-            $validated['image'] = $category->image;
+            $validated['image'] = $product->image;
         }
 
-        // Update category
-        $category->update($validated);
+        // Update product
+        $product->update($validated);
 
-        return redirect()->route('dashboard.category.index')
-            ->with('success', 'Category updated successfully.');
+        return redirect()->route('dashboard.product.index')
+            ->with('success', 'product updated successfully.');
     }
 
 
@@ -104,5 +122,12 @@ class ProductController extends Controller
 
         return redirect()->route('dashboard.product.index')
             ->with('success', 'Product deleted successfully.');
+    }
+
+    public function getSubCategories($category_id)
+    {
+        $subcategories = SubCategory::where('category_id', $category_id)->get();
+
+        return response()->json($subcategories);
     }
 }
