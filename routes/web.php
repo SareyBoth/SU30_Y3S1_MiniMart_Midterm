@@ -6,6 +6,9 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\SubCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\DiscountController;
+use App\Http\Controllers\Dashboard\BlogController;
 
 
 Route::get('/', function () {
@@ -43,6 +46,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/product/edit/{id}', [ProductController::class, 'edit'])->name('dashboard.product.edit');
     Route::put('/dashboard/product/update/{id}', [ProductController::class, 'update'])->name('dashboard.product.update');
     Route::delete('/dashboard/product/{id}', [ProductController::class, 'destroy'])->name('dashboard.product.destroy');
+
+    //Order
+    Route::get('/dashboard/order', [OrderController::class, 'index'])->name('dashboard.order.index');
+    Route::get('/dashboard/order/detail/{id}', [OrderController::class, 'detail'])->name('dashboard.order.detail');
+
+    //Discount
+    Route::get('/dashboard/coupon', [DiscountController::class, 'indexCoupon'])->name('dashboard.coupon.index');
+    Route::get('/dashboard/coupon/create', [DiscountController::class, 'createCoupon'])->name('dashboard.coupon.create');
+    Route::post('/dashboard/coupon', [DiscountController::class, 'storeCoupon'])->name('dashboard.coupon.store');
+    Route::delete('/dashboard/coupon/{id}', [DiscountController::class, 'destroyCoupon'])->name('dashboard.coupon.destory');
+
+    Route::get('/dashboard/discount/category', [DiscountController::class, 'indexCategory'])->name('dashboard.discount.category.index');
+
+    //Blog
+    Route::get('/dashboard/blog', [BlogController::class, 'index'])->name('dashboard.blog.index');
+    Route::get('/dashboard/blog/create', [BlogController::class, 'create'])->name('dashboard.blog.create');
+    Route::post('/dashboard/blog', [BlogController::class, 'store'])->name('dashboard.blog.store');
+    Route::get('/dashboard/blog/edit/{id}', [BlogController::class, 'edit'])->name('dashboard.blog.edit');
+    Route::put('/dashboard/blog/update/{id}', [BlogController::class, 'update'])->name('dashboard.blog.update');
+    Route::delete('/dashboard/blog/{id}', [BlogController::class, 'destroy'])->name('dashboard.blog.destroy');
 });
 
 require __DIR__ . '/auth.php';
