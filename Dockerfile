@@ -1,3 +1,14 @@
+# =================================================================
+# Stage 1: The "Builder" stage - Compiles frontend assets
+# =================================================================
+FROM node:18 as builder
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
 FROM php:8.3-apache
 
 WORKDIR /var/www/html
@@ -19,6 +30,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Copy the full app including artisan
 COPY . /var/www/html
+
+COPY public/.htaccess /var/www/html/public/
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
