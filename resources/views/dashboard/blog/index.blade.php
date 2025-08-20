@@ -43,7 +43,7 @@
                                 <p class=" line-clamp-2">{{ $blog->excerpt }}</p>
                                 <div class="blog-info clearfix">
                                     <div class="post-left">
-                                        <ul>aim-2">
+                                        <ul>
                                             <li><a href="#"><i class="fa fa-calendar"></i> <span>{{ $blog->published_at->format('F d, Y') }}</span></a></li>
                                         </ul>
                                     </div>

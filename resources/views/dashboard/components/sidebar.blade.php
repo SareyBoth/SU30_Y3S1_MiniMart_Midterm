@@ -77,8 +77,8 @@
                         <a href="/dashboard/blog"><i class="fa fa-commenting-o"></i> <span>Blog</span></a>
                     </li>
 
-                    <li class="{{ request()->is('dashboard/store-location*') ? 'active' : '' }}">
-                        <a href="/dashboard/store-location"><i class="fa-solid fa-location-dot"></i> <span>Store Location</span></a>
+                    <li class="{{ request()->is('dashboard/location*') ? 'active' : '' }}">
+                        <a href="/dashboard/location"><i class="fa-solid fa-location-dot"></i> <span>Location</span></a>
                     </li>
 
                     <li class="{{ request()->is('dashboard/media*') ? 'active' : '' }}">

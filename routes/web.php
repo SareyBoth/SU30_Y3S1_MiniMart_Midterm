@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\DiscountController;
 use App\Http\Controllers\Dashboard\BlogController;
+use App\Http\Controllers\Dashboard\LocationController;
 
 
 Route::get('/', function () {
@@ -66,6 +67,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/blog/edit/{id}', [BlogController::class, 'edit'])->name('dashboard.blog.edit');
     Route::put('/dashboard/blog/update/{id}', [BlogController::class, 'update'])->name('dashboard.blog.update');
     Route::delete('/dashboard/blog/{id}', [BlogController::class, 'destroy'])->name('dashboard.blog.destroy');
+
+    //Location
+    Route::get('/dashboard/location', [LocationController::class, 'index'])->name('dashboard.location.index');
+    Route::get('/dashboard/location/create', [LocationController::class, 'create'])->name('dashboard.location.create');
+    Route::post('/dashboard/location', [LocationController::class, 'store'])->name('dashboard.location.store');
+    Route::get('/dashboard/location/edit/{id}', [LocationController::class, 'edit'])->name('dashboard.location.edit');
+    Route::put('/dashboard/location/update/{id}', [LocationController::class, 'update'])->name('dashboard.location.update');
+    Route::delete('/dashboard/location/{id}', [LocationController::class, 'destroy'])->name('dashboard.location.destroy');
 });
 
 require __DIR__ . '/auth.php';
