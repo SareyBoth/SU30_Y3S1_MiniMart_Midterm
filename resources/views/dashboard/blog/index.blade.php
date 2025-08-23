@@ -9,9 +9,6 @@
 
     @include('dashboard.components.style')
 
-    <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/popper.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/bootstrap.min.js') }}"></script>
 </head>
 
 <body>

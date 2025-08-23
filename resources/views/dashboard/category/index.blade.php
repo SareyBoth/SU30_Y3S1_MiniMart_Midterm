@@ -9,9 +9,6 @@
 
     @include('dashboard.components.style')
 
-    <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/popper.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/bootstrap.min.js') }}"></script>
 </head>
 
 <body>
@@ -44,7 +41,7 @@
                 </div>
 
                 <div id="category-list" class="row doctor-grid">
-                   @foreach ($categories as $category)
+                    @foreach ($categories as $category)
                     <div class="col-md-4 col-sm-4 col-lg-3">
                         <div class="profile-widget">
                             <div class="doctor-img">
@@ -67,8 +64,8 @@
                             </div>
                             <h4 class="doctor-name text-ellipsis"><a>{{ $category->name }}</a></h4>
                             @php
-                                $statusName = $category->statusRelation ? $category->statusRelation->name : 'No Status';
-                                $statusStyle = strtolower($statusName) === 'active' ? 'color:green;' : (strtolower($statusName) === 'inactive' ? 'color:red;' : '');
+                            $statusName = $category->statusRelation ? $category->statusRelation->name : 'No Status';
+                            $statusStyle = strtolower($statusName) === 'active' ? 'color:green;' : (strtolower($statusName) === 'inactive' ? 'color:red;' : '');
                             @endphp
                             <p class="text-4" style="{{ $statusStyle }}">{{ $statusName }}</p>
                             <div class="user-country">{{ $category->description }}</div>
@@ -124,7 +121,6 @@
     <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-
     <script>
         $(document).ready(function() {
 
@@ -151,7 +147,6 @@
             setTimeout(() => {
                 $('#success-alert').alert('close');
             }, 3000);
-
         });
     </script>
 </body>

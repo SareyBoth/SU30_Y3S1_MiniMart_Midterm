@@ -10,10 +10,6 @@
     <!--Style-->
     @include('dashboard.components.style')
 
-    {{-- These scripts are loaded in the head to ensure jQuery is available for subsequent scripts --}}
-    <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/popper.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/bootstrap.min.js') }}"></script>
 </head>
 
 <body>

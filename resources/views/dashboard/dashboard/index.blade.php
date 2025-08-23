@@ -19,11 +19,11 @@
 <body>
     <div class="main-wrapper">
 
-    <!-- Header -->
-     @include('dashboard.components.header')
+        <!-- Header -->
+        @include('dashboard.components.header')
 
-    <!-- Sidebar -->
-     @include('dashboard.components.sidebar')
+        <!-- Sidebar -->
+        @include('dashboard.components.sidebar')
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -620,14 +620,6 @@
     <script src="assets/js/Chart.bundle.js"></script>
     <script src="assets/js/chart.js"></script>
     <script src="assets/js/app.js"></script> -->
-
-    <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/popper.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard/jquery.slimscroll.js') }}"></script>
-    <script src="{{ asset('js/dashboard/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('js/dashboard/chart.js') }}"></script>
-    <script src="{{ asset('js/dashboard/app.js') }}"></script>
 
 </body>
 
