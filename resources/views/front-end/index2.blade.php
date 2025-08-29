@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Organic - Grocery Store HTML Website Template</title>
+    <title>PrimeMart</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,37 +29,365 @@
 </head>
 
 <body>
-    @include('front-end.components.nav')
-
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="preloader-wrapper">
+        <div class="preloader">
         </div>
-
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="/images/meat-poster.png" class="d-block w-100" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img src="/images/snack-poster.png" class="d-block w-100" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img src="/images/bread-poster.png" class="d-block w-100" alt="Third slide">
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
 
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
+        <div class="offcanvas-header justify-content-center">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Growers cider</h6>
+                            <small class="text-body-secondary">Brief description</small>
+                        </div>
+                        <span class="text-body-secondary">$12</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Fresh grapes</h6>
+                            <small class="text-body-secondary">Brief description</small>
+                        </div>
+                        <span class="text-body-secondary">$8</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Heinz tomato ketchup</h6>
+                            <small class="text-body-secondary">Brief description</small>
+                        </div>
+                        <span class="text-body-secondary">$5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>$20</strong>
+                    </li>
+                </ul>
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
+
+        <div class="offcanvas-header justify-content-between">
+            <h4 class="fw-normal text-uppercase fs-6">Menu</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
+                <li class="nav-item border-dashed active">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-apple-alt fa-lg"></i>
+                        <span>Fruits and vegetables</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-cheese fa-lg"></i>
+                        <span>Dairy and Eggs</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-drumstick-bite fa-lg"></i>
+                        <span>Meat and Poultry</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-fish fa-lg"></i>
+                        <span>Seafood</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-bread-slice fa-lg"></i>
+                        <span>Bakery and Bread</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-archive fa-lg"></i>
+                        <span>Canned Goods</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-snowflake fa-lg"></i>
+                        <span>Frozen Foods</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-utensils fa-lg"></i>
+                        <span>Pasta and Rice</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-coffee fa-lg"></i>
+                        <span>Breakfast Foods</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-cookie-bite fa-lg"></i>
+                        <span>Snacks and Chips</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <button class="btn btn-toggle dropdown-toggle position-relative w-100 d-flex justify-content-between align-items-center text-dark p-2" data-bs-toggle="collapse" data-bs-target="#beverages-collapse" aria-expanded="false">
+                        <div class="d-flex gap-3">
+                            <i class="fas fa-wine-glass fa-lg"></i>
+                            <span>Beverages</span>
+                        </div>
+                    </button>
+                    <div class="collapse" id="beverages-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal ps-5 pb-1">
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Water</a></li>
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Juice</a></li>
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Soda</a></li>
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Tea</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-pepper-hot fa-lg"></i>
+                        <span>Spices and Seasonings</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-baby-carriage fa-lg"></i>
+                        <span>Baby Food and Formula</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-heartbeat fa-lg"></i>
+                        <span>Health and Wellness</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-pump-soap fa-lg"></i>
+                        <span>Household Supplies</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-spa fa-lg"></i>
+                        <span>Personal Care</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="fas fa-paw fa-lg"></i>
+                        <span>Pet Food and Supplies</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <header>
+        <div class="container-fluid">
+            <div class="row py-3 border-bottom">
+
+                <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
+                    <div class="d-flex align-items-center my-3 my-sm-0">
+                        <a href="index.html">
+                            <img src="{{ asset('images/favicon.png') }}" alt="logo" class="img-fluid">
+                        </a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+
+                <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4">
+                    <div class="search-bar row bg-light p-2 rounded-4">
+                        <div class="col-md-4 d-none d-md-block">
+                            <select class="form-select border-0 bg-transparent">
+                                <option>All Categories</option>
+                                <option>Groceries</option>
+                                <option>Drinks</option>
+                                <option>Chocolates</option>
+                            </select>
+                        </div>
+                        <div class="col-11 col-md-7">
+                            <form id="search-form" class="text-center" action="index.html" method="post">
+                                <input type="text" class="form-control border-0 bg-transparent" placeholder="Search for more than 20,000 products">
+                            </form>
+                        </div>
+                        <div class="col-1">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
+                        <li class="nav-item active">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                            <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
+                                <li><a href="index.html" class="dropdown-item">About Us </a></li>
+                                <li><a href="index.html" class="dropdown-item">Shop </a></li>
+                                <li><a href="index.html" class="dropdown-item">Single Product </a></li>
+                                <li><a href="index.html" class="dropdown-item">Cart </a></li>
+                                <li><a href="index.html" class="dropdown-item">Checkout </a></li>
+                                <li><a href="index.html" class="dropdown-item">Blog </a></li>
+                                <li><a href="index.html" class="dropdown-item">Single Post </a></li>
+                                <li><a href="index.html" class="dropdown-item">Styles </a></li>
+                                <li><a href="index.html" class="dropdown-item">Contact </a></li>
+                                <li><a href="index.html" class="dropdown-item">Thank You </a></li>
+                                <li><a href="index.html" class="dropdown-item">My Account </a></li>
+                                <li><a href="index.html" class="dropdown-item">404 Error </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-8 col-lg-2 d-flex align-items-center justify-content-center">
+                    <ul class="d-flex align-items-center justify-content-center list-unstyled m-0 gap-3">
+                        <li>
+                            <a href="#" class="p-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                <i class="fas fa-shopping-cart fa-lg"></i>
+                            </a>
+                        </li>
+                        <li>
+                            @guest
+                            <a href="/login" class="p-2">
+                                <i class="fas fa-user fa-lg"></i>
+                            </a>
+                            @endguest
+
+                            @auth
+                            <div class="p-2 flex flex-column align-items-center text-center ">
+                                {{ Auth::user()->name }}
+                                <img src="/storage/{{ Auth::user()->profile }}" alt="User Profile" style=" margin-left: 4px;width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #D1D5DB; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+                            </div>
+                            @endauth
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section style="background-image: url('{{ asset('images/banner-1.jpg') }}');background-repeat: no-repeat;background-size: cover;">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-lg-6 pt-5 mt-5">
+                    <h2 class="display-1 ls-1"><span class="fw-bold text-primary">Organic</span> Foods at your <span class="fw-bold">Doorsteps</span></h2>
+                    <p class="fs-4">Dignissim massa diam elementum.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Start Shopping</a>
+                        <a href="#" class="btn btn-dark text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Join Now</a>
+                    </div>
+                    <div class="row my-5">
+                        <div class="col">
+                            <div class="row text-dark">
+                                <div class="col-auto">
+                                    <p class="fs-1 fw-bold lh-sm mb-0">14k+</p>
+                                </div>
+                                <div class="col">
+                                    <p class="text-uppercase lh-sm mb-0">Product Varieties</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row text-dark">
+                                <div class="col-auto">
+                                    <p class="fs-1 fw-bold lh-sm mb-0">50k+</p>
+                                </div>
+                                <div class="col">
+                                    <p class="text-uppercase lh-sm mb-0">Happy Customers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row text-dark">
+                                <div class="col-auto">
+                                    <p class="fs-1 fw-bold lh-sm mb-0">10+</p>
+                                </div>
+                                <div class="col">
+                                    <p class="text-uppercase lh-sm mb-0">Store Locations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 g-0 justify-content-center">
+                <div class="col">
+                    <div class="card border-0 bg-primary rounded-0 p-4 text-light">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <i class="fas fa-leaf fa-3x"></i>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body p-0">
+                                    <h5 class="text-light">Fresh from farm</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-0 bg-secondary rounded-0 p-4 text-light">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <i class="fas fa-seedling fa-3x"></i>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body p-0">
+                                    <h5 class="text-light">100% Organic</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-0 bg-danger rounded-0 p-4 text-light">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <i class="fas fa-truck fa-3x"></i>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body p-0">
+                                    <h5 class="text-light">Free delivery</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <section class="py-5 overflow-hidden">
         <div class="container-lg">
@@ -151,27 +479,20 @@
                                         @endif
                                     </div>
                                     <div class="button-area p-3 pt-0">
-                                        @auth
-                                        <form action="{{ route('cart.add') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <div class="row g-1 mt-2">
-                                                <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" min="1"></div>
-                                                <div class="col-7">
-                                                    <button type="submit" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100">
-                                                        <i class="fas fa-shopping-cart me-1"></i> Add to Cart
-                                                    </button>
-                                                </div>
-                                                <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
-                                            </div>
-                                        </form>
-                                        @else
                                         <div class="row g-1 mt-2">
-                                            <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" disabled></div>
-                                            <div class="col-7"><a href="/login" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
-                                            <div class="col-2"><a href="/login" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
+                                            <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
+                                            <form class="col-7" action="{{ route('cart.add') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="hidden" name="quantity" value="1">
+
+                                                <button type="submit" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">
+                                                    <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                                                </button>
+                                            </form>
+
+                                            <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
                                         </div>
-                                        @endauth
                                     </div>
                                 </div>
                             </div>
@@ -221,11 +542,10 @@
                                         </h5>
                                         @php
                                         $discount = $product->discountRelation?->discount_value;
-                                        $original_price = $product->original_price ?? $product->price;
                                         @endphp
                                         <div class="d-flex justify-content-center align-items-center gap-2">
                                             @if($discount)
-                                            <del>${{ number_format($original_price, 2) }}</del>
+                                            <del>${{ number_format($product->original_price, 2) }}</del>
                                             @endif
                                             <span class="text-dark fw-semibold">${{ number_format($product->price, 2) }}</span>
                                             @if ($discount)
@@ -235,27 +555,11 @@
                                             @endif
                                         </div>
                                         <div class="button-area p-3 pt-0">
-                                            @auth
-                                            <form action="{{ route('cart.add') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <div class="row g-1 mt-2">
-                                                    <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" min="1"></div>
-                                                    <div class="col-7">
-                                                        <button type="submit" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100">
-                                                            <i class="fas fa-shopping-cart me-1"></i> Add to Cart
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
-                                                </div>
-                                            </form>
-                                            @else
                                             <div class="row g-1 mt-2">
-                                                <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" disabled></div>
-                                                <div class="col-7"><a href="/login" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
-                                                <div class="col-2"><a href="/login" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
+                                                <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
+                                                <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
+                                                <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
                                             </div>
-                                            @endauth
                                         </div>
                                     </div>
                                 </div>
@@ -309,27 +613,11 @@
                                                 @endif
                                             </div>
                                             <div class="button-area p-3 pt-0">
-                                                @auth
-                                                <form action="{{ route('cart.add') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <div class="row g-1 mt-2">
-                                                        <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" min="1"></div>
-                                                        <div class="col-7">
-                                                            <button type="submit" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100">
-                                                                <i class="fas fa-shopping-cart me-1"></i> Add to Cart
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
-                                                    </div>
-                                                </form>
-                                                @else
                                                 <div class="row g-1 mt-2">
-                                                    <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" disabled></div>
-                                                    <div class="col-7"><a href="/login" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
-                                                    <div class="col-2"><a href="/login" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
+                                                    <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
+                                                    <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
+                                                    <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
                                                 </div>
-                                                @endauth
                                             </div>
                                         </div>
                                     </div>
@@ -383,27 +671,11 @@
                                                 @endif
                                             </div>
                                             <div class="button-area p-3 pt-0">
-                                                @auth
-                                                <form action="{{ route('cart.add') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <div class="row g-1 mt-2">
-                                                        <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" min="1"></div>
-                                                        <div class="col-7">
-                                                            <button type="submit" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100">
-                                                                <i class="fas fa-shopping-cart me-1"></i> Add to Cart
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
-                                                    </div>
-                                                </form>
-                                                @else
                                                 <div class="row g-1 mt-2">
-                                                    <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" disabled></div>
-                                                    <div class="col-7"><a href="/login" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart w-100"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
-                                                    <div class="col-2"><a href="/login" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
+                                                    <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
+                                                    <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><i class="fas fa-shopping-cart me-1"></i> Add to Cart</a></div>
+                                                    <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><i class="fas fa-heart"></i></a></div>
                                                 </div>
-                                                @endauth
                                             </div>
                                         </div>
                                     </div>
@@ -614,7 +886,7 @@
 
                 <div class="col-md-2 col-sm-6">
                     <div class="footer-menu">
-                        <h5 class="widget-title">PrimeMart</h5>
+                        <h5 class="widget-title">Organic</h5>
                         <ul class="menu-list list-unstyled">
                             <li class="menu-item">
                                 <a href="#" class="nav-link">About us</a>
@@ -705,17 +977,11 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-md-6 copyright">
-                    <p>© 2025 PrimeMart. All rights reserved.</p>
+                    <p>© 2025 PrimeMart All rights reserved.</p>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            $('#carouselExampleIndicators').carousel();
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>

@@ -61,7 +61,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td class="text-center">{{ $productCategory}}</td>
                                         <td class="text-center">{{ $productSubCategory}}</td>
-                                        <td class="text-center">${{ $product->price }}</td>
+                                        <td class="text-center">${{ $product->original_price }}</td>
                                         <td class="text-center">{{ $product->stock_quantity }}</td>
                                         <td class="text-center">
                                             <span class="custom-badge {{ $product->status == 1 ? 'status-green' : ($product->status == 2 ? 'status-red' : '') }}">

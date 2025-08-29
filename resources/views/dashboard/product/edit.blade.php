@@ -96,7 +96,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Price <span class="text-danger">*</span></label>
-                                        <input name="price" value="{{ old('name', $product->price) }}" class="form-control" placeholder="Input price" type="number">
+                                        <input name="original_price" value="{{ old('name', $product->original_price) }}" class="form-control" placeholder="Input price" type="number">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

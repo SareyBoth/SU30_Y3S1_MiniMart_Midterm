@@ -46,7 +46,7 @@
                         <div class="profile-widget">
                             <div class="doctor-img">
                                 <a class="avatar">
-                                    <img alt="" src="/storage/{{ $category->image }}" />
+                                    <img class="bg-cover" alt="" src="/storage/{{ $category->image }}" />
                                 </a>
                             </div>
                             <div class="dropdown profile-action">

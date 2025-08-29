@@ -10,11 +10,15 @@ use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\DiscountController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\LocationController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\Front\FrontBlogController;
 
 
-Route::get('/', function () {
-    return view('front-end.index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('front.index');
+Route::get('/blog', [FrontBlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/detail/{id}', [FrontBlogController::class, 'detail'])->name('blog.detail');
+
 Route::get('/get-subcategories/{category_id}', [ProductController::class, 'getSubCategories']);
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -75,6 +79,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/location/edit/{id}', [LocationController::class, 'edit'])->name('dashboard.location.edit');
     Route::put('/dashboard/location/update/{id}', [LocationController::class, 'update'])->name('dashboard.location.update');
     Route::delete('/dashboard/location/{id}', [LocationController::class, 'destroy'])->name('dashboard.location.destroy');
+
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
 });
 
 require __DIR__ . '/auth.php';

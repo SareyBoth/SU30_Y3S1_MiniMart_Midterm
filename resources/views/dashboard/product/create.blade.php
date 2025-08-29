@@ -84,7 +84,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Price <span class="text-danger">*</span></label>
-                                            <input name="price" class="form-control" placeholder="Input price" type="number">
+                                            <input name="original_price" class="form-control" placeholder="Input price" type="number">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
