@@ -54,7 +54,7 @@
                                         <td class="text-center">{{ $order->shipping_address }}</td>
                                         <td class="text-center">{{ $order->payment_status }}</td>
                                         <td class="text-center">{{ $order->status }}</td>
-                                        <td class="text-center">{{ $order->total_amount }}</td>
+                                        <td class="text-center">{{ $order->total_amount }}$</td>
                                         <td class="text-center">
                                             <a href="{{ route('dashboard.order.detail', $order->id) }}" title="Detail">
                                                 <i class="fa-solid fa-magnifying-glass" style="color: #007bff; font-size: 16px; margin-right: 8px;"></i>

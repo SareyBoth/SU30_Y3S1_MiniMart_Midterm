@@ -15,7 +15,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Front\FrontBlogController;
 use App\Http\Controllers\Front\FrontLocationController;
 use App\Http\Controllers\Front\FrontCategoryController;
-
+use App\Http\Controllers\Dashboard\DiscountProductController;
 
 Route::get('/', [HomeController::class, 'index'])->name('front.index');
 Route::get('/blog', [FrontBlogController::class, 'index'])->name('blog.index');
@@ -26,13 +26,11 @@ Route::get('/product/{product}', [FrontCategoryController::class, 'product'])->n
 
 Route::get('/get-subcategories/{category_id}', [ProductController::class, 'getSubCategories']);
 //Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth', 'is.admin'])->group(function () {
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
     //Category
     Route::get('/dashboard/category', [CategoryController::class, 'index'])->name('dashboard.category.index');
     Route::get('/dashboard/category/create', [CategoryController::class, 'create'])->name('dashboard.category.create');
@@ -85,6 +83,18 @@ Route::middleware('auth')->group(function () {
     Route::put('/dashboard/location/update/{id}', [LocationController::class, 'update'])->name('dashboard.location.update');
     Route::delete('/dashboard/location/{id}', [LocationController::class, 'destroy'])->name('dashboard.location.destroy');
 
+    Route::get('/dashboard/discount-product', [DiscountProductController::class, 'index'])->name('dashboard.discount-product.index');
+    Route::get('/dashboard/discount-product/create', [DiscountProductController::class, 'create'])->name('dashboard.discount-product.create');
+    Route::post('/dashboard/discount-product', [DiscountProductController::class, 'store'])->name('dashboard.discount-product.store');
+    Route::get('/dashboard/discount-product/edit/{discount_product}', [DiscountProductController::class, 'edit'])->name('dashboard.discount-product.edit');
+    Route::put('/dashboard/discount-product/{discount_product}', [DiscountProductController::class, 'update'])->name('dashboard.discount-product.update');
+    Route::delete('/dashboard/discount-product/{discount_product}', [DiscountProductController::class, 'destroy'])->name('dashboard.discount-product.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
     Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');

@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-    <title>PrimeMart</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
+    <title>Order Detail - PrimeMart</title>
 
-    <!--Style-->
+    <!-- Style -->
     @include('dashboard.components.style')
 
     <script src="{{ asset('js/dashboard/jquery-3.2.1.min.js') }}"></script>
@@ -30,41 +30,42 @@
                     <div class="col-sm-7 col-6">
                         <h4 class="page-title">Order Detail</h4>
                     </div>
-
                     <div class="col-sm-5 col-6 text-right m-b-30">
-                        <a href="edit-profile.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Profile</a>
+                        <a href="{{ route('dashboard.order.index') }}" class="btn btn-primary btn-rounded"><i class="fa fa-arrow-left"></i> Back to Orders</a>
                     </div>
                 </div>
-                <div class="card-box profile-header">
-                    <div class="row">
+                <div class="card-box profile-header py-5">
+                    <div class="row pb-3">
                         <div class="col-md-12">
                             <div class="profile-view">
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
-                                        <a href="#"><img class="avatar" src="assets/img/doctor-03.jpg" alt=""></a>
+                                        {{-- Assuming user has a profile image --}}
+                                        <a href="#"><img class="avatar" src="{{ asset('/storage/' . ($order->user->profile ?? 'profile/default_profile.jpg')) }}" alt="User Profile"></a>
                                     </div>
                                 </div>
                                 <div class="profile-basic">
                                     <div class="row">
-                                        <div class="col-md-5 mb-5">
+                                        <div class="col-md-5 mb-3">
                                             <div class="profile-info-left">
-                                                <h3 class="user-name m-t-0 mb-0">Cristina Groves</h3>
-                                                <div class="staff-id mb-5">Order ID : DR-0001</div>
+                                                <h3 class="user-name m-t-0 mb-0">{{ $order->user->name ?? 'N/A' }}</h3>
+                                                <div class="staff-id mb-2">Order ID: {{ $order->order_id }}</div>
+                                                <div class="staff-id">Status: <span class="badge bg-warning text-dark">{{ ucfirst($order->status) }}</span></div>
                                             </div>
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
                                                 <li>
                                                     <span class="title">Phone:</span>
-                                                    <span class="text"><a href="#">770-889-6484</a></span>
+                                                    <span class="text"><a href="#">{{ $order->user->phone ?? 'N/A' }}</a></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Email:</span>
-                                                    <span class="text"><a href="#">cristinagroves@example.com</a></span>
+                                                    <span class="text"><a href="#">{{ $order->user->email ?? 'N/A' }}</a></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Shipping Address:</span>
-                                                    <span class="text">714 Burwell Heights Road, Bridge City, TX, 77611</span>
+                                                    <span class="text">{{ $order->shipping_address }}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -76,29 +77,58 @@
                 </div>
                 <div class="profile-tabs">
                     <ul class="nav nav-tabs nav-tabs-bottom">
-                        <li class="nav-item"><a class="nav-link active" href="#about-cont" data-toggle="tab">Order Items</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Address</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#order-items-tab" data-toggle="tab">Order Items</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#address-tab" data-toggle="tab">Details</a></li>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="about-cont">
-                            Tab content 1
+                        <div class="tab-pane show active" id="order-items-tab">
+                            <div class="table-responsive">
+                                <table class="table table-striped custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Product Name</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-right">Price</th>
+                                            <th class="text-right">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($order->orderItems as $item)
+                                        <tr>
+                                            <td><img src="{{ asset('storage/' . $item->product->image) }}" width="50" height="50" alt="{{ $item->product->name }}"></td>
+                                            <td>{{ $item->product->name }}</td>
+                                            <td class="text-center">{{ $item->quantity }}</td>
+                                            <td class="text-right">${{ number_format($item->price, 2) }}</td>
+                                            <td class="text-right">${{ number_format($item->quantity * $item->price, 2) }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row justify-content-end mt-4">
+                                <div class="col-md-4">
+                                    <div class="text-right">
+                                        <h4>Total: <span class="font-weight-bold">${{ number_format($order->total_amount, 2) }}</span></h4>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane" id="bottom-tab2">
-                            Tab content 2
+                        <div class="tab-pane" id="address-tab">
+                            <h5 class="mb-3">Order Details</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Payment Method:</strong> {{ $order->payment_method }}</li>
+                                <li class="list-group-item"><strong>Payment Status:</strong> {{ ucfirst($order->payment_status) }}</li>
+                                <li class="list-group-item"><strong>Notes:</strong> {{ $order->notes ?? 'No notes provided.' }}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
     <div class="sidebar-overlay" data-reff=""></div>
-
-    <script>
-
-    </script>
 </body>
 
 </html>

@@ -4,14 +4,37 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class DiscountProduct extends Model
 {
     use HasFactory;
 
-    public $timestamps = true;
-    protected $table = "discount_products";
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'discount_products';
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'product_id';
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'product_id',
         'discount_type',
@@ -22,17 +45,12 @@ class DiscountProduct extends Model
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * Get the product that this discount belongs to.
      */
-    protected $casts = [
-        'valid_from' => 'datetime',
-        'valid_until' => 'datetime',
-        'is_active' => 'boolean',
-    ];
-
-    /**
-     * The categories that this discount applies to.
-     */
+    public function product()
+    {
+        // This defines the relationship: A DiscountProduct belongs to a Product.
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }
+
