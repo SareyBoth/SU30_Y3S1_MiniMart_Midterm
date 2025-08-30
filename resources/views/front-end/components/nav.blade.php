@@ -83,12 +83,11 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                             <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
-                                <li><a href="index.html" class="dropdown-item">About Us </a></li>
-                                <li><a href="index.html" class="dropdown-item">Cart </a></li>
-                                <li><a href="index.html" class="dropdown-item">Blog </a></li>
-                                <li><a href="index.html" class="dropdown-item">Location </a></li>
-                                <li><a href="index.html" class="dropdown-item">Contact </a></li>
-                                <li><a href="index.html" class="dropdown-item">My Account </a></li>
+                                <li><a href="l" class="dropdown-item">About Us </a></li>
+                                <li><a href="/cart" class="dropdown-item">Cart </a></li>
+                                <li><a href="/blog" class="dropdown-item">Blog </a></li>
+                                <li><a href="/location" class="dropdown-item">Location </a></li>
+                                <li><a href="" class="dropdown-item">My Account </a></li>
                             </ul>
                         </li>
                     </ul>

@@ -86,7 +86,7 @@
                     <div class="category-carousel swiper">
                         <div class="swiper-wrapper">
                             @foreach ($categories as $category )
-                            <a href="category.html" class="nav-link swiper-slide text-center">
+                            <a href="/category/{{ $category->id }}" class="nav-link swiper-slide text-center">
                                 <img src="/storage/{{ $category->image }}" class="rounded-circle " style=" width: 160px; height: 160px;" alt="Category Thumbnail">
                                 <h4 class="fs-6 mt-3 fw-normal category-title">{{ $category->name }}</h4>
                             </a>
