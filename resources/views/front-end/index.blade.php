@@ -126,7 +126,7 @@
                         <div class="col">
                             <div class="product-item">
                                 <figure>
-                                    <a href="index.html" title="Product Title">
+                                    <a href="/product/{{ $product->id }}" title="Product Title">
                                         <img src="/storage/{{ $product->image }}" alt="Product Thumbnail" class="tab-image">
                                     </a>
                                 </figure>
@@ -210,7 +210,7 @@
                             <div class="col">
                                 <div class="product-item">
                                     <figure>
-                                        <a href="index.html" title="Product Title">
+                                        <a href="/product/{{ $product->id }}" title="Product Title">
                                             <img src="/storage/{{ $product->image }}" alt="Product Thumbnail" class="tab-image">
                                         </a>
                                     </figure>
@@ -284,7 +284,7 @@
                                 <div class="col">
                                     <div class="product-item">
                                         <figure>
-                                            <a href="index.html" title="Product Title">
+                                            <a href="/product/{{ $product->id }}" title="Product Title">
                                                 <img src="/storage/{{ $product->image }}" alt="Product Thumbnail" class="tab-image">
                                             </a>
                                         </figure>
@@ -358,7 +358,7 @@
                                 <div class="col">
                                     <div class="product-item">
                                         <figure>
-                                            <a href="index.html" title="Product Title">
+                                            <a href="/product/{{ $product->id }}" title="Product Title">
                                                 <img src="/storage/{{ $product->image }}" alt="Product Thumbnail" class="tab-image">
                                             </a>
                                         </figure>
@@ -691,7 +691,7 @@
                     <div class="footer-menu">
                         <h5 class="widget-title">Subscribe Us</h5>
                         <p>Subscribe to our newsletter to get updates about our grand offers.</p>
-                        <form class="d-flex mt-3 gap-0" action="index.html">
+                        <form class="d-flex mt-3 gap-0" action="">
                             <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="Email Address" aria-label="Email Address">
                             <button class="btn btn-dark rounded-end rounded-0" type="submit">Subscribe</button>
                         </form>

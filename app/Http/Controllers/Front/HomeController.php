@@ -11,16 +11,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // // $butchery_product = Product::orderBy('id', 'asc')->select('name', 'image', 'stock_quantity', 'price')->limit(10)->get();
-        // $butchery_product = Product::with(['discountRelation' => function ($query) {
-        //     $query->where('is_active', true);
-        // }])
-        //     ->orderBy('id', 'asc')
-        //     ->select('id', 'name', 'image', 'stock_quantity', 'price', 'original_price', 'product_id')
-        //     ->limit(10)
-        //     ->get();
 
-        $categories = Category::where('status', 1)->select('name', 'image')->get();
+        $categories = Category::where('status', 1)->select('id','name', 'image')->get();
         $activeDiscount = ['discountRelation' => function ($query) {
             $query->where('is_active', true);
         }];

@@ -15,4 +15,8 @@ class Category extends Model
     {
         return $this->belongsTo(Status::class, 'status', 'id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
